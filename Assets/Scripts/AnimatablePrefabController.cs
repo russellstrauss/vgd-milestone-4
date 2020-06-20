@@ -14,7 +14,6 @@ public class AnimatablePrefabController : MonoBehaviour
 	}
 
 	void Update() {
-		Debug.Log(colliding);
 		if (colliding) {
 			animator.speed = 1f;
 		}

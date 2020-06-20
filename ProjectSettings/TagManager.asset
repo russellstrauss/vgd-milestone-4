@@ -23,7 +23,7 @@ TagManager:
   - player
   - static_obstacle
   - post_processing
-  - 
+  - NavMesh
   - 
   - 
   - 
