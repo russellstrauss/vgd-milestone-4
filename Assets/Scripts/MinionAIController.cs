@@ -10,14 +10,32 @@ public class MinionAIController : MonoBehaviour
 	private int currentWaypoint = 0;
 	Animator animator;
 	
+	public AIState aiState;
+	public enum AIState {
+		Patrol,
+		GoToMovingWaypoint
+	};
+	
 	void Start() {
 		animator = gameObject.GetComponent<Animator>();
-		setNextWaypoint();
+		//aiState = AIState.GoToMovingWaypoint;
+		
+		if (aiState == AIState.Patrol) setNextWaypoint();
 	}
 
 	void Update() {
-		animator.SetFloat("vely", agent.velocity.magnitude / agent.speed);
-		if (agent.remainingDistance < 1 && !agent.pathPending) setNextWaypoint();
+		
+		switch (aiState) {
+			case AIState.Patrol:
+				animator.SetFloat("vely", agent.velocity.magnitude / agent.speed);
+				if (agent.remainingDistance < 2 && !agent.pathPending) setNextWaypoint();
+			break;
+			case AIState.GoToMovingWaypoint:
+				Debug.Log("MovingWaypoint State");
+			break;
+			default:
+			break;
+		}
 	}
 	
 	void setNextWaypoint() {
